@@ -21,4 +21,4 @@ elif args[0] == "delete":
 elif args[0] == "list":
     list_tasks()
 else:
-    print("Error: undefined argument. Supported arguments: add, update, delete, list.")
+    print("Error: undefined command. Supported commands: add, update, delete, mark-in-progress, mark-done, list.")

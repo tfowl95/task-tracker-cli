@@ -7,21 +7,27 @@ def check_args(args):
     if len(args) == 0:
         print("Error: missing initial command. Supported commands: add, update, delete, list.")
         sys.exit()
+    elif len(args) > 2 and args[0] == "delete":
+        print("Error: incorrect number of arguments. 'delete' command accepts one argument: id")
+        sys.exit()
+    elif len(args) > 2 and (args[0] == "mark-in-progress" or args[0] == "mark-done"):
+        print("Error: incorrect number of arguments. status change commands accept one argument: id")
+        sys.exit()
     elif (len(args) == 1 or len(args) > 2) and args[0] == "add":
         print("Error: incorrect number of arguments. 'add' command accepts one argument: description (double quotes for strings)")
-        sys.exit()
-    elif not args[1].isdigit() and args[0] == "update":
-        print("Error: incorrect argument format. The argument following 'update' must be a numerical task id")
         sys.exit()
     elif (len(args) == 2 or len(args) == 1 or len(args) > 3) and args[0] == "update":
         print("Error: incorrect number of arguments. 'update' command accepts two arguments: id, description (double quotes for strings)")
         sys.exit()
-    elif not args[1].isdigit() and args[0] == "delete":
-        print("Error: incorrect argument format. The argument following 'delete' must be a numerical task id")
-        sys.exit()
-    elif len(args) > 2 and args[0] == "delete":
-        print("Error: incorrect number of arguments. 'delete' command accepts one argument: id")
-        sys.exit()
+    elif len(args) == 2 and args[0] == "update":
+        if not args[1].isdigit():
+            print("Error: incorrect argument format. The argument following 'update' must be a numerical task id")
+            sys.exit()
+    elif len(args) == 2 and args[0] == "delete":
+        if not args[1].isdigit():
+            print("Error: incorrect argument format. The argument following 'delete' must be a numerical task id")
+            sys.exit()
+    
 
 def create_file_if_missing(file_path):
     if not Path(file_path).exists():
