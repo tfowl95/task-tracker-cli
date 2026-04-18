@@ -10,8 +10,17 @@ def check_args(args):
     elif (len(args) == 1 or len(args) > 2) and args[0] == "add":
         print("Error: incorrect number of arguments. 'add' command accepts one argument: description (double quotes for strings)")
         sys.exit()
+    elif not args[1].isdigit() and args[0] == "update":
+        print("Error: incorrect argument format. The argument following 'update' must be a numerical task id")
+        sys.exit()
     elif (len(args) == 2 or len(args) == 1 or len(args) > 3) and args[0] == "update":
         print("Error: incorrect number of arguments. 'update' command accepts two arguments: id, description (double quotes for strings)")
+        sys.exit()
+    elif not args[1].isdigit() and args[0] == "delete":
+        print("Error: incorrect argument format. The argument following 'delete' must be a numerical task id")
+        sys.exit()
+    elif len(args) > 2 and args[0] == "delete":
+        print("Error: incorrect number of arguments. 'delete' command accepts one argument: id")
         sys.exit()
 
 def get_unique_id(tasks_content):
