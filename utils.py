@@ -60,9 +60,20 @@ def update_task(id, description, tasks_content, file_path):
             continue
     if not match_found:
         print("Error: task id not found. Please run command 'list' for a list of tasks.")
+        sys.exit()
 
-def delete_task():
-    print("In delete_task")
+def delete_task(id, tasks_content, file_path):
+    id = int(id)
+    previous_len = len(tasks_content)
+    tasks_content = [task for task in tasks_content if task.get("id") != id]
+    new_len = len(tasks_content)
+    if previous_len == new_len:
+        print("Error: task id not found. Please run command 'list' for a list of tasks.")
+        sys.exit()
+    else:
+        with open(file_path, "w") as file:
+            json.dump(tasks_content, file, indent = 4)
+        print("Task deleted successfully")
 
 def list_tasks():
     print("In list_tasks")

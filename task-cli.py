@@ -17,7 +17,7 @@ if args[0] == "add":
 elif args[0] == "update":
     update_task(args[1], args[2], tasks_content, file_path)
 elif args[0] == "delete":
-    delete_task()
+    delete_task(args[1], tasks_content, file_path)
 elif args[0] == "list":
     list_tasks()
 else:
