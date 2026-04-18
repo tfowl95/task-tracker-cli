@@ -10,7 +10,7 @@ def check_args(args):
     elif len(args) > 2 and args[0] == "delete":
         print("Error: incorrect number of arguments. 'delete' command accepts one argument: id")
         sys.exit()
-    elif len(args) > 2 and (args[0] == "mark-in-progress" or args[0] == "mark-done"):
+    elif (len(args) > 2 or len(args) == 1) and (args[0] == "mark-in-progress" or args[0] == "mark-done"):
         print("Error: incorrect number of arguments. status change commands accept one argument: id")
         sys.exit()
     elif (len(args) == 1 or len(args) > 2) and args[0] == "add":
@@ -56,7 +56,7 @@ def add_task(description, tasks_content, file_path):
         json.dump(tasks_content, file, indent = 4)
     print(f"Task added successfully (ID: {new_id})")
 
-def update_task(id, description, tasks_content, file_path):
+def update_task_description(id, description, tasks_content, file_path):
     match_found = False
     id = int(id)
     for task in tasks_content:
@@ -86,6 +86,27 @@ def delete_task(id, tasks_content, file_path):
         with open(file_path, "w") as file:
             json.dump(tasks_content, file, indent = 4)
         print("Task deleted successfully")
+
+def update_task_status(id, new_status, tasks_content, file_path):
+    match_found = False
+    id = int(id)
+    for task in tasks_content:
+        if id == task.get("id"):
+            match_found = True
+            if new_status == "mark-in-progress":
+                task["status"] = "In progress"
+            else:
+                task["status"] = "Done"
+            task["updatedAt"] = str(datetime.datetime.now().strftime("%m/%d/%Y %I:%M %p"))
+            with open(file_path, "w") as file:
+                json.dump(tasks_content, file, indent = 4)
+            print("Task status updated successfully")
+            break
+        else:
+            continue
+    if not match_found:
+        print("Error: task id not found. Please run command 'list' for a list of tasks.")
+        sys.exit()
 
 def list_tasks():
     print("In list_tasks")

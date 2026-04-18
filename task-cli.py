@@ -15,9 +15,11 @@ with open(file_path, "r") as file:
 if args[0] == "add":
     add_task(args[1], tasks_content, file_path)
 elif args[0] == "update":
-    update_task(args[1], args[2], tasks_content, file_path)
+    update_task_description(args[1], args[2], tasks_content, file_path)
 elif args[0] == "delete":
     delete_task(args[1], tasks_content, file_path)
+elif args[0] == "mark-in-progress" or args[0] == "mark-done":
+    update_task_status(args[1], args[0], tasks_content, file_path)
 elif args[0] == "list":
     list_tasks()
 else:
