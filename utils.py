@@ -3,7 +3,8 @@ from pathlib import Path
 import json
 import datetime
 
-def add_task(new_id, description, tasks_content, file_path):
+def add_task(description, tasks_content, file_path):
+    new_id = get_unique_id(tasks_content)
     now = str(datetime.datetime.now().strftime("%m/%d/%Y %I:%M %p"))
     new_task = build_json_obj(new_id, description, "Not started", now, now)
     tasks_content.append(new_task)
@@ -44,7 +45,7 @@ def check_args(args):
         print("Error: too many arguments. 'add' command accepts one argument and requires double quotes for strings")
         sys.exit()
 
-def find_new_id(tasks_content):
+def get_unique_id(tasks_content):
     existing_ids = []
     for task in tasks_content:
         existing_ids.append(int(task.get("id")))

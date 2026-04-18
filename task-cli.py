@@ -13,8 +13,7 @@ with open(file_path, "r") as file:
     tasks_content = json.load(file)
 
 if args[0] == "add":
-    new_id = find_new_id(tasks_content)
-    add_task(new_id, args[1], tasks_content, file_path)
+    add_task(args[1], tasks_content, file_path)
 elif args[0] == "update":
     update_task()
 elif args[0] == "delete":
