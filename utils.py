@@ -23,6 +23,11 @@ def check_args(args):
         print("Error: incorrect number of arguments. 'delete' command accepts one argument: id")
         sys.exit()
 
+def create_file_if_missing(file_path):
+    if not Path(file_path).exists():
+        with open(file_path, "w") as file:
+            json.dump([], file)
+
 def get_unique_id(tasks_content):
     existing_ids = []
     for task in tasks_content:
@@ -52,6 +57,7 @@ def update_task(id, description, tasks_content, file_path):
         if id == task.get("id"):
             match_found = True
             task["description"] = description
+            task["updatedAt"] = str(datetime.datetime.now().strftime("%m/%d/%Y %I:%M %p"))
             with open(file_path, "w") as file:
                 json.dump(tasks_content, file, indent = 4)
             print("Task description updated successfully")
@@ -85,8 +91,3 @@ def build_json_obj(id, description, status, createdAt, updatedAt):
             "createdAt": createdAt,
             "updatedAt": updatedAt
     }
-
-def create_file_if_missing(file_path):
-    if not Path(file_path).exists():
-        with open(file_path, "w") as file:
-            json.dump([], file)
