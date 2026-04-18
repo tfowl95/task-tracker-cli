@@ -21,6 +21,10 @@ elif args[0] == "delete":
 elif args[0] == "mark-in-progress" or args[0] == "mark-done":
     update_task_status(args[1], args[0], tasks_content, file_path)
 elif args[0] == "list":
-    list_tasks()
+    try:
+        type = args[1]
+    except IndexError:
+        type = "all"
+    list_tasks(tasks_content, type)
 else:
     print("Error: undefined command. Supported commands: add, update, delete, mark-in-progress, mark-done, list.")

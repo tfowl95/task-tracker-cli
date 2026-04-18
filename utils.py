@@ -27,6 +27,12 @@ def check_args(args):
         if not args[1].isdigit():
             print("Error: incorrect argument format. The argument following 'delete' must be a numerical task id")
             sys.exit()
+    elif len(args) > 2 and args[0] == "list":
+        print("Error: incorrect number of arguments. 'list' command accepts one optional argument: type (done, todo, in-progress)")
+        sys.exit()
+    elif len(args) == 2 and args[0] == "list" and args[1] not in ("done", "todo", "in-progress"):
+        print("Error: incorrect second argument. 'list' command second argument: done, todo, in-progress")
+        sys.exit()
     
 
 def create_file_if_missing(file_path):
@@ -108,8 +114,24 @@ def update_task_status(id, new_status, tasks_content, file_path):
         print("Error: task id not found. Please run command 'list' for a list of tasks.")
         sys.exit()
 
-def list_tasks():
-    print("In list_tasks")
+def print_task(task):
+    print(f"{'ID: ':15}{task.get('id')}")
+    print(f"{'Description: ':15}{task.get('description')}")
+    print(f"{'Status: ':15}{task.get('status')}")
+    print(f"{'Created At: ':15}{task.get('createdAt')}")
+    print(f"{'Updated At: ':15}{task.get('updatedAt')}")
+    print("----------------------------------")
+
+def list_tasks(tasks_content, type):
+    for task in tasks_content:
+        if type == "all":
+            print_task(task)
+        elif type == "done" and task.get("status") == "Done":
+            print_task(task)
+        elif type == "todo" and task.get("status") != "Done":
+            print_task(task)
+        elif type == "in-progress" and task.get("status") == "In progress":
+            print_task(task)
 
 def build_json_obj(id, description, status, createdAt, updatedAt):
     return {"id": id,
