@@ -1,14 +1,19 @@
 import json
 import sys
 import time
-from utils import add_task, update_task, delete_task, list_tasks, build_json
+from utils import add_task, update_task, delete_task, list_tasks, build_json_obj
 
 
-def main():
-    file_path = "tasks.json"
-    args = sys.argv[1:]
-    test_json = build_json(args[0], args[1], args[2], time.time(), time.time())
-    print(test_json)
+file_path = "tasks.json"
+args = sys.argv[1:]
 
-if __name__ == "__main__":
-    main()
+if args[0] == "add":
+    add_task()
+elif args[0] == "update":
+    update_task()
+elif args[0] == "delete":
+    delete_task()
+elif args[0] == "list":
+    list_tasks()
+else:
+    print("Error, undefined command. Supported commands: add, update, delete, list.")

@@ -1,16 +1,16 @@
 def add_task():
-    pass
+    print("In add_task")
 
 def update_task():
-    pass
+    print("In update_task")
 
 def delete_task():
-    pass
+    print("In delete_task")
 
 def list_tasks():
-    pass
+    print("In list_tasks")
 
-def build_json(id, description, status, createdAt, updatedAt):
+def build_json_obj(id, description, status, createdAt, updatedAt):
     return {"id": id,
             "description": description,
             "status": status,
