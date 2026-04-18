@@ -15,7 +15,7 @@ with open(file_path, "r") as file:
 if args[0] == "add":
     add_task(args[1], tasks_content, file_path)
 elif args[0] == "update":
-    update_task()
+    update_task(args[1], args[2], tasks_content, file_path)
 elif args[0] == "delete":
     delete_task()
 elif args[0] == "list":
