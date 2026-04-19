@@ -9,7 +9,8 @@ from utils import *
 args = sys.argv[1:]
 check_args(args)
 
-file_path = os.path.expanduser("~/dev/task-tracker-cli/tasks.json")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(base_dir, "tasks.json")
 create_file_if_missing(file_path)
 with open(file_path, "r") as file:
     tasks_content = json.load(file)
