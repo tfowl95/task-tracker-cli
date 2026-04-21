@@ -4,6 +4,14 @@ A lightweight command-line task tracker written in Python. Tasks are stored loca
 
 ---
 
+## Concepts used
+
+* CLI positional arguments via sys.argv
+* JSON file i/o
+* Creating executable script that runs in bash from any directory
+
+---
+
 ## Features
 
 * Add, update, and delete tasks
