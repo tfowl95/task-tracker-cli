@@ -44,7 +44,7 @@ tasks.json      # Auto-created task storage file
 1. Clone or download the project:
 
 ```
-git clone <your-repo-url>
+git clone https://github.com/tfowl95/task-tracker-cli.git
 cd task-tracker-cli
 ```
 
